@@ -15,6 +15,14 @@ def roman_to_int (s)
   total = 0
   prev_value = 0
 
+  s.each_char do |char| # itera sobre cada caracter da string 's'
+    current_value = roman_values[char] # armazena o valor do numeral romano atual
+
+    # Lógica para soma e subtração
+    if current_value > prev_value
+
+    total
+  end
 
 
 
