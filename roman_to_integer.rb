@@ -21,13 +21,12 @@ def roman_to_int (s)
     # Lógica para soma e subtração
     if current_value > prev_value
       total += current_value - 2 * prev_value
-      else
-       total += current_value
-      end
-      prev_value = current_value
+    else
+      total += current_value
     end
 
-    total
+    prev_value = current_value
   end
 
+  total
 end
