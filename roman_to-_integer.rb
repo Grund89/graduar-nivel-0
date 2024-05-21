@@ -12,5 +12,13 @@ def roman_to_int (s)
     'M' => 1000,
   }
 
+  total = 0
+  prev_value = 0
+
+
+
+
+
+
 
 end
