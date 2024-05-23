@@ -11,4 +11,9 @@ def remove_element(nums, val)
     i+= 1
   end
 
+  return i
 end
+
+nums = [3, 2, 2, 3]
+val = 3
+new_length = remove_element(nums, val)
