@@ -6,7 +6,9 @@ def remove_element(nums, val)
  i  = 0
 
  nums.each do |nums|
-  if
+  if num != val
+    nums[i] = nums
+    i+= 1
   end
 
 end
