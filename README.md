@@ -1,114 +1,148 @@
----
 
-# Conversão de Números Romanos para Inteiros
+```markdown
+# Tarefa de Mentoria em Programação
 
-## Visão Geral
+## Descrição
 
-Este projeto foi desenvolvido para converter números romanos em números inteiros usando a linguagem de programação Ruby. A aplicação foi construída com o intuito de demonstrar a compreensão das regras de formação dos números romanos e a habilidade de implementar uma solução eficiente e correta.
+Este repositório contém a resolução de três algoritmos desafiadores, parte de uma tarefa de mentoria em programação. 
+A entrega desses algoritmos foi realizada com o objetivo de demonstrar meu entendimento e habilidades 
+na implementação de soluções eficientes e bem estruturadas.
 
-## Funcionalidades
+## Algoritmos Implementados
 
-- Conversão de qualquer número romano válido para seu equivalente inteiro.
-- Implementação seguindo as melhores práticas de programação em Ruby.
-- Validação básica de entradas para garantir que apenas números romanos válidos sejam processados.
+### 1. Conversão de Números Romanos para Inteiros
 
-## Como Funciona
+- **Arquivo:** `roman_to_int.rb`
+- **Descrição:** Implementa a conversão de uma string representando um número romano em seu valor inteiro correspondente.
+- **Exemplo de Uso:**
+  ```ruby
+  s = "MCMXCIV"
+  result = roman_to_int(s)
+  puts "O número romano #{s} corresponde ao inteiro #{result}."
+  ```
+- **Código:**
+  ```ruby
+  # @param {String} s
+  # @return {Integer}
+  def roman_to_int(s)
+    roman_values = {
+      'I' => 1,
+      'V' => 5,
+      'X' => 10,
+      'L' => 50,
+      'C' => 100,
+      'D' => 500,
+      'M' => 1000,
+    }
 
-### Algoritmo Implementado
+    total = 0
+    prev_value = 0
 
-O algoritmo percorre a string representando o número romano da direita para a esquerda. Para cada caractere, ele verifica se deve somar ou subtrair seu valor baseado no valor do caractere anterior. A regra básica é:
-
-- Se um numeral menor precede um numeral maior, o menor é subtraído.
-- Caso contrário, o numeral é somado.
-
-### Exemplo de Código
-
-```ruby
-# @param {String} s
-# @return {Integer}
-def roman_to_int(s)
-  # Mapeamento dos valores dos numerais romanos
-  roman_values = {
-    'I' => 1,
-    'V' => 5,
-    'X' => 10,
-    'L' => 50,
-    'C' => 100,
-    'D' => 500,
-    'M' => 1000
-  }
-
-  # Variáveis para armazenar o total e o valor anterior
-  total = 0
-  prev_value = 0
-
-  # Iteração sobre os caracteres do string de trás para frente
-  s.reverse.each_char do |char|
-    current_value = roman_values[char]
-    
-    # Verificação da regra de subtração
-    if current_value < prev_value
-      total -= current_value
-    else
-      total += current_value
+    s.each_char do |char|
+      current_value = roman_values[char]
+      if current_value > prev_value
+        total += current_value - 2 * prev_value
+      else
+        total += current_value
+      end
+      prev_value = current_value
     end
 
-    # Atualização do valor anterior
-    prev_value = current_value
+    total
   end
+  ```
 
-  total
-end
-```
+### 2. Remoção de Elementos de um Array
 
-### Explicação do Código
+- **Arquivo:** `remove_element.rb`
+- **Descrição:** Remove todas as instâncias de um valor específico de um array e retorna o novo comprimento do array.
+- **Exemplo de Uso:**
+  ```ruby
+  nums = [3, 2, 2, 3]
+  val = 3
+  new_length = remove_element(nums, val)
+  puts "Novo comprimento do array: #{new_length}"
+  ```
+- **Código:**
+  ```ruby
+  # @param {Integer[]} nums
+  # @param {Integer} val
+  # @return {Integer}
+  def remove_element(nums, val)
+    i = 0
+    nums.each do |num|
+      if num != val
+        nums[i] = num
+        i += 1
+      end
+    end
+    i
+  end
+  ```
 
-1. **Mapeamento dos valores dos numerais romanos:** Criamos um hash que associa cada caractere romano ao seu valor correspondente.
-2. **Inicialização de variáveis:** `total` armazena o valor final acumulado, e `prev_value` armazena o valor do numeral processado anteriormente.
-3. **Iteração reversa sobre a string:** Percorremos a string de trás para frente para aplicar corretamente as regras de subtração.
-4. **Verificação de subtração/adicionamento:** Comparamos o valor atual com o anterior para decidir se somamos ou subtraímos.
-5. **Atualização do valor anterior:** No final de cada iteração, atualizamos `prev_value` para o próximo caractere.
+### 3. Encontre Dois Números que Somam para um Valor Alvo
 
-## Como Executar
+- **Arquivo:** `two_sum.rb`
+- **Descrição:** Encontra dois números em um array que somam para um valor alvo e retorna seus índices.
+- **Exemplo de Uso:**
+  ```ruby
+  nums = [2, 7, 11, 15]
+  target = 9
+  result = two_sum(nums, target)
+  puts "Índices dos números que somam para #{target}: #{result}"
+  ```
+- **Código:**
+  ```ruby
+  # @param {Integer[]} nums
+  # @param {Integer} target
+  # @return {Integer[]}
+  def two_sum(nums, target)
+    num_map = {}
 
-Para executar o código, você precisará do Ruby instalado em seu sistema. Siga as instruções abaixo:
+    nums.each_with_index do |num, index|
+      complement = target - num
+      if num_map.key?(complement)
+        return [num_map[complement], index]
+      end
+      num_map[num] = index
+    end
+
+    []
+  end
+  ```
+
+## Instruções para Execução
+
+Para executar os códigos, certifique-se de ter o Ruby instalado em seu ambiente. Siga os passos abaixo:
 
 1. Clone o repositório:
-   ```sh
-   git clone https://github.com/SeuUsuario/nome-do-repositorio.git
+   ```bash
+   git clone https://github.com/Grund89/graduar-nivel-0
    ```
-2. Navegue até o diretório do projeto:
-   ```sh
-   cd nome-do-repositorio
+2. Navegue até o diretório do repositório:
+   ```bash
+   cd NomeDoRepositorio
    ```
-3. Execute o script Ruby:
-   ```sh
-   ruby nome_do_script.rb
+3. Execute os arquivos Ruby individualmente:
+   ```bash
+   ruby roman_to_int.rb
+   ruby remove_element.rb
+   ruby two_sum.rb
    ```
-
-## Testes
-
-Você pode adicionar testes para validar a funcionalidade do código usando bibliotecas de teste como RSpec. Um exemplo de teste pode ser:
-
-```ruby
-require 'rspec'
-require_relative 'nome_do_script'
-
-RSpec.describe '#roman_to_int' do
-  it 'converte corretamente o número romano para inteiro' do
-    expect(roman_to_int('III')).to eq(3)
-    expect(roman_to_int('IV')).to eq(4)
-    expect(roman_to_int('IX')).to eq(9)
-    expect(roman_to_int('LVIII')).to eq(58)
-    expect(roman_to_int('MCMXCIV')).to eq(1994)
-  end
-end
-```
 
 ## Contato
 
-Para mais informações, dúvidas ou sugestões, sinta-se à vontade para entrar em contato:
+Se você tiver dúvidas ou sugestões, sinta-se à vontade para entrar em contato comigo através do meu [LinkedIn](https://www.linkedin.com/in/douglasgrund).
+
+---
+
+Agradeço pela oportunidade de demonstrar minhas habilidades e estou ansioso para receber feedback sobre meu trabalho.
+
+---
+
+### 📲 Você pode me encontrar em:
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/douglasgrund)
 
 ---
+```
